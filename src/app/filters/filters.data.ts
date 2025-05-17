@@ -1,4 +1,4 @@
-import { TFilter } from "./types/TFilter";
+import { TFilter } from "./types/TFilter.types";
 
 export const filtersData:TFilter[] = [
   "Popular",

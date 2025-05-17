@@ -1,4 +1,4 @@
-import { TFilter } from "@/app/filters/types/TFilter";
+import { TFilter } from "@/app/filters/types/TFilter.types";
 
 export interface IStore {
     currentFilter: TFilter;
