@@ -9,7 +9,7 @@ export const useGetStyleRotation = (
 
     const distanceFromMiddle = Math.abs(index - middle)
     const translateY = 
-        Math.pow(distanceFromMiddle, 2 * 7)
+        Math.pow(distanceFromMiddle, 5)
 
     return {
         rotate: rotate,

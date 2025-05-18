@@ -1,13 +1,19 @@
+'use client';
+
 import { scale } from "motion";
 import { useGetStyleRotation } from "./hooks/useGetStyleRotation";
 import { ICarouselItem } from "./types/ICaruselItem.types";
 import * as m from "motion/react-m"
 import Image from "next/image";
+import { mediaData } from "@/media/media.data";
+import { useCarouselStore } from "@/store/carousel.store";
+import { twMerge } from "tailwind-merge";
 
-export function CarouselItem({ index, item, arrayLength }: ICarouselItem) {
+export function CarouselItem({ item, index }: ICarouselItem) {
+    const {activeCardId, setActiveCardId} = useCarouselStore()
     const {rotate, translateY} = useGetStyleRotation(
         index,
-        arrayLength
+        mediaData.length,
     )
 
     const initialAnimation = {
@@ -19,11 +25,16 @@ export function CarouselItem({ index, item, arrayLength }: ICarouselItem) {
 
 	return (
         <m.button
-            className="h-[8.5rem] w-24 inline-block rounded-lg will-change-transform 
-                      relative border-2 border-transparent transition-colors -ml-7"
+            className={
+                twMerge(
+                    "inline-block rounded-xl will-change-transform relative border-2 border-transparent transition -ml-7 overflow-hidden",
+                    activeCardId === item.id ? "grayscale-0" : "grayscale-100",
+                )
+            }            
             initial={{ scale: 1, zIndex: 0, y: 0 }}
-            animate={initialAnimation}
-            transition={{ type: "keyframes", stiffness: 230, damping: 32 }}        
+            // animate={initialAnimation}
+            transition={{ type: "keyframes", stiffness: 230, damping: 32 }}
+            onClick={() => setActiveCardId(item.id)}        
         >
             <Image
                 width={315}
@@ -31,7 +42,8 @@ export function CarouselItem({ index, item, arrayLength }: ICarouselItem) {
                 src={item.poster}
                 alt={item.title}
                 draggable={false}
-                className="will-change-transform"            
+                className="will-change-transform" 
+                priority={index > 6 ? false : true}           
             />    
         </m.button>
 	)

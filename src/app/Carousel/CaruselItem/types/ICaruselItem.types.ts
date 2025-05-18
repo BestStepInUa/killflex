@@ -1,7 +1,6 @@
 import { IMediaItem } from "../../types/IMediaItem.types.";
 
-export interface ICarouselItem {
-    index: number
+export interface ICarouselItem {    
+	index: number
 	item: IMediaItem
-	arrayLength: number
 }

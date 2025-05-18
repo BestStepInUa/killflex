@@ -1,3 +1,4 @@
+import { Carousel } from "./Carousel/Carousel"
 import { Filters } from "./filters/Filters"
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
       Discover Unlimited Content
     </h1>
     <Filters />
+    <Carousel />
   </div>
   )  
 }
