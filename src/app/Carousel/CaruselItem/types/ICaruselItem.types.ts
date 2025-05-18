@@ -1,4 +1,4 @@
-import { IMediaItem } from "../../interfaces/IMediaItem.types.";
+import { IMediaItem } from "../../types/IMediaItem.types.";
 
 export interface ICarouselItem {
     index: number

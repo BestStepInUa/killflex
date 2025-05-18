@@ -1,4 +1,4 @@
-import { IStore } from "./interfaces/IStore.types";
+import { IStore } from "./types/IStore.types";
 import { create } from "zustand";
 
 export const useFilterStore = create<IStore>((set) => ({

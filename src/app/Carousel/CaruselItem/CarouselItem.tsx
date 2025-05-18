@@ -1,6 +1,6 @@
 import { scale } from "motion";
 import { useGetStyleRotation } from "./hooks/useGetStyleRotation";
-import { ICarouselItem } from "./interfaces/ICaruselItem.types";
+import { ICarouselItem } from "./types/ICaruselItem.types";
 import * as m from "motion/react-m"
 import Image from "next/image";
 

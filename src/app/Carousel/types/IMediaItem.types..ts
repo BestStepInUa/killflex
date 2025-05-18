@@ -8,9 +8,8 @@ export interface IMediaItem {
     rating: number
     
     poster: string
-    backdrop: string
+    backdrop?: string
 
-    type: TFilter
     year: number
 
     seasons?: ISeason[]
