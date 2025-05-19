@@ -4,4 +4,5 @@ export interface ICarouselItem {
 	index: number
 	item: IMediaItem
 	length: number
+	updateActiveCard: () => void
 }

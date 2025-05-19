@@ -10,7 +10,7 @@ import { twMerge } from "tailwind-merge";
 
 // TODO Details is also should be with animation
 
-export function CarouselItem({ item, index, length }: ICarouselItem) {
+export function CarouselItem({ item, index, length, updateActiveCard }: ICarouselItem) {
     const {activeCardId, setActiveCardId} = useCarouselStore()
     const isActive = activeCardId === item.id
    
@@ -23,7 +23,7 @@ export function CarouselItem({ item, index, length }: ICarouselItem) {
         <div
             style={{
                 position: "absolute",
-                top: "85%",
+                top: "50%",
                 left: "50%",
                 transform: `translate(-50%, -50%) rotate(${angle}deg) translate(0, -${radius}px)`,
                 zIndex: isActive ? 1 : 0,
@@ -43,7 +43,7 @@ export function CarouselItem({ item, index, length }: ICarouselItem) {
                 zIndex: isActive ? 1 : 0            
             }}
             transition={{ type: "keyframes", stiffness: 200, damping: 20 }}
-            onClick={() => setActiveCardId(item.id)}        
+            onClick={updateActiveCard}        
         >
             <Image
                 width={252}
@@ -55,7 +55,7 @@ export function CarouselItem({ item, index, length }: ICarouselItem) {
                 priority={index > 6 ? false : true}           
             />    
             </m.button>
-        </div>
+        </div> 
         
 	)
 }

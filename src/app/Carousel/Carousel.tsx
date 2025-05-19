@@ -1,15 +1,58 @@
+'use client';
+
+import { useState } from "react";
+import * as m from "motion/react-m"
 import { mediaData } from "@/media/media.data";
+import { useCarouselStore } from "@/store/carousel.store";
 import { CarouselItem } from "./CaruselItem/CarouselItem";
 
+const getCardIndex = (cardId: number) => mediaData.findIndex(item => item.id === cardId);
+
 export function Carousel() {
-    return <div className="mx-auto mt-14 relative w-[800px] h-[800px]">
-            {mediaData.map((media, index) => (
-                <CarouselItem
-                    key={media.id}
-                    item={media}
-                    index={index}
-                    length={mediaData.length}
-                />
-            ))}
-        </div>;
+    const {activeCardId, setActiveCardId} = useCarouselStore();
+     
+    const [rotateAngle, setRotateAngle] = useState(0);
+
+    const rotateAngleStep = 360 / mediaData.length;
+   
+    // const realIndex = activeIndex + 1;
+    
+    const updateActiveCard = (id: number) => {
+        const oldIndex = getCardIndex(activeCardId);
+        
+        const newIndex = getCardIndex(id);
+        
+        const diff = newIndex - oldIndex;
+        let newRotateAngle = -(diff * rotateAngleStep);
+        newRotateAngle = newRotateAngle === 330 ? -30 : newRotateAngle;
+        newRotateAngle = newRotateAngle === -330 ? 30 : newRotateAngle;
+        
+        setRotateAngle(prev => prev + newRotateAngle);
+        
+        setActiveCardId(id);
     }
+
+    return (
+        <m.div className="mx-auto mt-60 relative w-[952px] h-[952px]"
+            initial ={{ 
+                rotate: 0
+            }}
+            animate={{
+                rotate: rotateAngle ? `${rotateAngle}deg` : 0,
+            }}
+            transition={{
+                type: "keyframes",
+            }}
+        >
+        {mediaData.map((media, index) => (
+            <CarouselItem
+                key={media.id}
+                item={media}
+                index={index}
+                length={mediaData.length}
+                updateActiveCard={updateActiveCard.bind(null, media.id)}
+            />
+        ))}
+        </m.div> 
+    )          
+}
