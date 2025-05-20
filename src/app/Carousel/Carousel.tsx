@@ -9,24 +9,23 @@ import { CarouselItem } from "./CaruselItem/CarouselItem";
 const getCardIndex = (cardId: number) => mediaData.findIndex(item => item.id === cardId);
 
 export function Carousel() {
-    const {activeCardId, setActiveCardId} = useCarouselStore();
-     
+    const {activeCardId, setActiveCardId} = useCarouselStore();     
     const [rotateAngle, setRotateAngle] = useState(0);
 
-    const rotateAngleStep = 360 / mediaData.length;
-   
-    // const realIndex = activeIndex + 1;
-    
-    const updateActiveCard = (id: number) => {
-        const oldIndex = getCardIndex(activeCardId);
+    const rotateAngleStep = 360 / mediaData.length;    
         
+    const updateActiveCard = (id: number) => {
+        if (activeCardId === id) return;
+        
+        const oldIndex = getCardIndex(activeCardId);        
         const newIndex = getCardIndex(id);
         
         const diff = newIndex - oldIndex;
+        
         let newRotateAngle = -(diff * rotateAngleStep);
         newRotateAngle = newRotateAngle === 330 ? -30 : newRotateAngle;
         newRotateAngle = newRotateAngle === -330 ? 30 : newRotateAngle;
-        
+       
         setRotateAngle(prev => prev + newRotateAngle);
         
         setActiveCardId(id);
@@ -42,6 +41,7 @@ export function Carousel() {
             }}
             transition={{
                 type: "keyframes",
+                duration: 0.6,
             }}
         >
         {mediaData.map((media, index) => (
