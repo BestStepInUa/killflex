@@ -23,11 +23,15 @@ export function Carousel() {
         const diff = newIndex - oldIndex;
         
         let newRotateAngle = -(diff * rotateAngleStep);
+        
         newRotateAngle = newRotateAngle === 330 ? -30 : newRotateAngle;
         newRotateAngle = newRotateAngle === -330 ? 30 : newRotateAngle;
-       
-        setRotateAngle(prev => prev + newRotateAngle);
-        
+        newRotateAngle = newRotateAngle === 300 ? -60 : newRotateAngle;
+        newRotateAngle = newRotateAngle === -300 ? 60 : newRotateAngle;
+        newRotateAngle = newRotateAngle === 270 ? -90 : newRotateAngle;
+        newRotateAngle = newRotateAngle === -270 ? 90 : newRotateAngle;
+               
+        setRotateAngle(prev => prev + newRotateAngle);        
         setActiveCardId(id);
     }
 

@@ -10,8 +10,6 @@ import { useCarouselStore } from "@/store/carousel.store";
 import { twMerge } from "tailwind-merge";
 import { CarouselItemDetails } from "../CarouselItemDetails/CarouselItemDetails";
 
-// TODO Details is also should be with animation
-
 export function CarouselItem({ item, index, length, updateActiveCard }: ICarouselItem) {
     const {activeCardId, setActiveCardId} = useCarouselStore()
     const isActive = activeCardId === item.id
@@ -34,7 +32,6 @@ export function CarouselItem({ item, index, length, updateActiveCard }: ICarouse
             <m.button
             className={twMerge(
                 "rounded-xl will-change-transform relative transition overflow-hidden",
-                // !isActive && "grayscale-100 contrast-75",
                 isActive && "shadow-lg"
             )}            
             initial={{ 

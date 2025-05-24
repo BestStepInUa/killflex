@@ -1,6 +1,5 @@
 import { ICarouselItemDetails } from "./types/ICarouselItemDetails.types"
 import { Star, TvMinimal } from "lucide-react"
-import { easeOut } from "motion"
 import * as m from "motion/react-m"
 
 const animation = {
