@@ -24,7 +24,7 @@ export async function generateMetadata(props: {
 export default async function Page(props: {
     params: {slug: string}
 }) {
-    const params = props.params
+    const params = await props.params
     const { slug } = params
 
     const mediaItem = mediaData.find(mediaItem => mediaItem.slug === slug)

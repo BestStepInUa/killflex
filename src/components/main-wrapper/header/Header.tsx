@@ -20,6 +20,8 @@ export function Header() {
           width={40}
           height={40} 
           className="rounded-full"
+          priority={true}
+          draggable={false}
         />          
       </div>      
     </header>
