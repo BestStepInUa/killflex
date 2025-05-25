@@ -1,4 +1,4 @@
-import { Carousel } from "./Carousel/Carousel"
+import { Carousel } from "./carousel/Carousel"
 import { Filters } from "./filters/Filters"
 
 export default function Home() {

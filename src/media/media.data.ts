@@ -1,4 +1,4 @@
-import { IMediaItem } from "@/app/Carousel/types/IMediaItem.types.";
+import { IMediaItem } from "@/app/carousel/types/IMediaItem.types.";
 import { seasons } from "./seasons.data";
 
 export const mediaData: IMediaItem[] = [

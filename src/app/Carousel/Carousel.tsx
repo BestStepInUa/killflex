@@ -5,6 +5,7 @@ import * as m from "motion/react-m"
 import { mediaData } from "@/media/media.data";
 import { useCarouselStore } from "@/store/carousel.store";
 import { CarouselItem } from "./CaruselItem/CarouselItem";
+import { useRouter } from "next/navigation";
 
 const getCardIndex = (cardId: number) => mediaData.findIndex(item => item.id === cardId);
 
@@ -12,11 +13,16 @@ export function Carousel() {
     const {activeCardId, setActiveCardId} = useCarouselStore();     
     const [rotateAngle, setRotateAngle] = useState(0);
 
+    const router = useRouter()
+
     const rotateAngleStep = 360 / mediaData.length;    
         
     const updateActiveCard = (id: number) => {
-        if (activeCardId === id) return;
-        
+        if (activeCardId === id) {
+            router.push(`/media/${mediaData[getCardIndex(id)].slug}`)
+            return;
+        }
+
         const oldIndex = getCardIndex(activeCardId);        
         const newIndex = getCardIndex(id);
         

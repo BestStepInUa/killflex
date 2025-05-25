@@ -26,7 +26,7 @@ export function CarouselItem({ item, index, length, updateActiveCard }: ICarouse
                 top: "50%",
                 left: "50%",
                 transform: `translate(-50%, -50%) rotate(${angle}deg) translate(0, -${radius}px)`,
-                zIndex: isActive ? 1 : 0,
+                zIndex: isActive ? 20 : 0,
             }}
         >
             <m.button
@@ -35,12 +35,10 @@ export function CarouselItem({ item, index, length, updateActiveCard }: ICarouse
                 isActive && "shadow-lg"
             )}            
             initial={{ 
-                zIndex: 0,
                 filter: "grayscale(100%) contrast(75%)"                
             }}
             animate={{
                 scale: isActive ? 1.2 : 1,
-                zIndex: isActive ? 1 : 0,
                 filter: isActive ? "grayscale(0%) contrast(100%)" : "grayscale(100%) contrast(75%)"
             }}
             transition={{
