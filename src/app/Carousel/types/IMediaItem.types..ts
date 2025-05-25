@@ -8,7 +8,7 @@ export interface IMediaItem {
     rating: number
     
     poster: string
-    backdrop?: string
+    backdrop: string
 
     year: number
 

@@ -9,6 +9,7 @@ export const mediaData: IMediaItem[] = [
         year: 2021,
         rating: 8.2,
         poster: "/posters/loki.webp",
+        backdrop: "/backdrops/loki.webp",
         genres: ["Action", "Adventure", "Fantasy"],
         seasons 
     },
@@ -18,6 +19,7 @@ export const mediaData: IMediaItem[] = [
         year: 2019,    
         rating: 8.1,
         poster: "/posters/the-morning-show.webp",
+        backdrop: "/backdrops/the-morning-show.webp",
         genres: ["Drama"],
         seasons
     },
@@ -28,6 +30,7 @@ export const mediaData: IMediaItem[] = [
         year: 2018,
         rating: 7.7,
         poster: "/posters/you.webp",
+        backdrop: "/backdrops/you.webp",
         genres: ["Drama", "Thriller", "Romance"],
         seasons
     },
@@ -38,6 +41,7 @@ export const mediaData: IMediaItem[] = [
         year: 2016,
         rating: 8.6,
         poster: "/posters/stranger-things.webp",
+        backdrop: "/backdrops/stranger-things.webp",
         genres: ["Drama", "Fantasy", "Horror"],
         seasons  
     },
@@ -48,6 +52,7 @@ export const mediaData: IMediaItem[] = [
         year: 2020,
         rating: 7.4,
         poster: "/posters/bridgerton.webp",
+        backdrop: "/backdrops/bridgerton.webp",
         genres: ["Drama", "Romance"],
         seasons
     },
@@ -58,6 +63,7 @@ export const mediaData: IMediaItem[] = [
         year: 2020,
         rating: 6.8,
         poster: "/posters/emily-in-paris.webp",
+        backdrop: "/backdrops/emily-in-paris.webp",
         genres: ["Comedy", "Drama", "Romance"],
         seasons
     },
@@ -68,6 +74,7 @@ export const mediaData: IMediaItem[] = [
         year: 2019,
         rating: 8.6,
         poster: "/posters/the-boys.webp",
+        backdrop: "/backdrops/the-boys.webp",
         genres: ["Action", "Comedy", "Crime"],
         seasons
     },
@@ -78,6 +85,7 @@ export const mediaData: IMediaItem[] = [
         year: 2019,
         rating: 8.6,
         poster: "/posters/the-mandalorian.webp",
+        backdrop: "/backdrops/the-mandalorian.webp",
         genres: ["Action", "Adventure", "Fantasy"],
         seasons
     },
@@ -88,6 +96,7 @@ export const mediaData: IMediaItem[] = [
         year: 2013,
         rating: 8.7,
         poster: "/posters/peaky-blinders.webp",
+        backdrop: "/backdrops/peaky-blinders.webp",
         genres: ["Crime", "Drama"],
         seasons        
     },
@@ -98,6 +107,7 @@ export const mediaData: IMediaItem[] = [
         year: 2022,
         rating: 8.0,
         poster: "/posters/reacher.webp",
+        backdrop: "/backdrops/reacher.webp",
         genres: ["Action", "Adventure", "Crime"],
         seasons
     },
@@ -108,6 +118,7 @@ export const mediaData: IMediaItem[] = [
         year: 2008,
         rating: 9.5,
         poster: "/posters/breaking-bad.webp",
+        backdrop: "/backdrops/breaking-bad.webp",
         genres: ["Crime", "Drama", "Thriller"],
         seasons
     },
@@ -118,6 +129,7 @@ export const mediaData: IMediaItem[] = [
         year: 2016,
         rating: 8.4,
         poster: "/posters/westworld.webp",
+        backdrop: "/backdrops/westworld.webp",
         genres: ["Drama", "Mystery", "Sci-Fi"],
         seasons   
     }
