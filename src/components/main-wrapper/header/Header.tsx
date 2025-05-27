@@ -14,7 +14,7 @@ export function Header() {
 
   return (
     <header className={twMerge(
-      "p-7 flex items-center justify-between relative z-[1]",
+      "p-7 flex items-center justify-between relative z-1",
       isMediaPage && "text-white"
     )}
     >

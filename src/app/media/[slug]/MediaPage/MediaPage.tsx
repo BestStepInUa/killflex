@@ -29,7 +29,7 @@ export function MediaPage({mediaItem}: IMediaPage) {
     return (
     <div>
         <div style={style} className="bg-center bg-cover bg-no-repeat relative -mt-25 left-0 z-0">            
-            <div className="absolute w-full bottom-0 left-0 z-1 p-8 flex items-end justify-between">
+            <div className="absolute w-full bottom-0 left-0 p-8 flex items-end justify-between z-1">
                 <MediaDetails mediaItem={mediaItem}/>            
                 <Products /> 
             </div>                                  
