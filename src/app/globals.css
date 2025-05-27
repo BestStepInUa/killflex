@@ -13,6 +13,7 @@
 }
 
 body {
+  @apply relative;
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-montserrat), sans-serif;

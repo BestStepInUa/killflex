@@ -4,16 +4,22 @@ import { Bell, Grip, Search } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu } from "./Menu";
+import { twMerge } from "tailwind-merge";
 
 export function Header() {
 
   const pathname = usePathname();
+  const isMediaPage = pathname.includes("/media/");
 
   return (
-    <header className="p-7 flex items-center justify-between">
+    <header className={twMerge(
+      "p-7 flex items-center justify-between relative z-[1]",
+      isMediaPage && "text-white"
+    )}
+    >
       <div className="flex items-center gap-6">
         <Grip className="transition-colors hover:text-primary"/>     
-        {!pathname.includes("/media/") && <Menu />}
+        {!isMediaPage && <Menu />}
       </div>
 
       <div className="flex items-center gap-6">
