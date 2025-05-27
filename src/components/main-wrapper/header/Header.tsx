@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu } from "./Menu";
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 
 export function Header() {
 
@@ -18,7 +19,9 @@ export function Header() {
     )}
     >
       <div className="flex items-center gap-6">
-        <Grip className="transition-colors hover:text-primary"/>     
+        <Link className="transition-colors hover:text-primary" href="/">
+            <Grip />
+        </Link>             
         {!isMediaPage && <Menu />}
       </div>
 

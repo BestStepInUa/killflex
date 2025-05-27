@@ -12,7 +12,7 @@ export interface IMediaItem {
 
     year: number
 
-    seasons?: ISeason[]
+    seasons: ISeason[]
 
     genres: string[]
 }
