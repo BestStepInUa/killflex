@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import * as m from "motion/react-m"
 import { mediaData } from "@/media/media.data";
 import { useCarouselStore } from "@/store/carousel.store";
 import { CarouselItem } from "./CaruselItem/CarouselItem";
 import { useRouter } from "next/navigation";
+import { useMainAnimationStore } from "@/store/main-animation.store";
 
 const getCardIndex = (cardId: number) => mediaData.findIndex(item => item.id === cardId);
 
@@ -13,13 +14,30 @@ export function Carousel() {
     const {activeCardId, setActiveCardId} = useCarouselStore();     
     const [rotateAngle, setRotateAngle] = useState(0);
 
-    const router = useRouter()
+    const {changeState, resetState} = useMainAnimationStore();
+
+    useLayoutEffect(() => {
+        resetState();
+    }, []);
+
+    console.log('activeCardId', activeCardId)
+
+    const router = useRouter();
 
     const rotateAngleStep = 360 / mediaData.length;    
         
     const updateActiveCard = (id: number) => {
         if (activeCardId === id) {
-            router.push(`/media/${mediaData[getCardIndex(id)].slug}`)
+            changeState("isNewPageAnimation", true);
+            setTimeout(() => {
+                changeState("isHideHeading", true),
+                changeState("isHideOtherCards", true);
+            }, 600);
+
+            setTimeout(() => {
+                router.push(`/media/${mediaData[getCardIndex(id)].slug}`)
+            }, 1000);
+
             return;
         }
 
@@ -59,8 +77,8 @@ export function Carousel() {
                 key={media.id}
                 item={media}
                 index={index}
-                length={mediaData.length}
                 updateActiveCard={updateActiveCard.bind(null, media.id)}
+                
             />
         ))}
         </m.div> 
