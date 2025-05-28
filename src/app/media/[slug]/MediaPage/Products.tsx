@@ -16,6 +16,7 @@ export function Products() {
                     height={180}
                     src="/products/product.png"
                     alt="product"
+                    priority={true}
                     className="bg-white rounded-lg z-3 relative"
                 />
                 <m.div

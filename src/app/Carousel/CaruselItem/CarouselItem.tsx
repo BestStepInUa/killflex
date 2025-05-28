@@ -47,8 +47,8 @@ export function CarouselItem({ item, index, updateActiveCard }: ICarouselItem) {
             }}
             animate={isActiveNewPageAnimation ? {
                     scale: 1.3,
-                    translateY: -35,
-                    rotateX: -180,
+                    translateY: -45,
+                    rotateX: -92,
                     filter: "grayscale(0%) contrast(100%)",              
                 } 
                 : {
@@ -64,7 +64,7 @@ export function CarouselItem({ item, index, updateActiveCard }: ICarouselItem) {
             onClick={updateActiveCard}        
         >   
             <AnimatePresence>
-                {isActive && <CarouselItemDetails item={item} />}
+                {isActive && <CarouselItemDetails item={item}/>}
             </AnimatePresence>
             <Image
                 width={252}
@@ -74,7 +74,7 @@ export function CarouselItem({ item, index, updateActiveCard }: ICarouselItem) {
                 draggable="false"
                 className="will-change-transform" 
                 priority={index > 6 ? false : true}           
-            />    
+            />  
             </m.button>
         </div> 
         

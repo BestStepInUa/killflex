@@ -26,6 +26,9 @@ export function Carousel() {
         
     const updateActiveCard = (id: number) => {
         if (activeCardId === id) {
+            const url = `/media/${mediaData[getCardIndex(id)].slug}`;
+            router.prefetch(url);
+
             changeState("isNewPageAnimation", true);
             setTimeout(() => {
                 changeState("isHideHeading", true),
@@ -33,7 +36,7 @@ export function Carousel() {
             }, 600);
 
             setTimeout(() => {
-                router.push(`/media/${mediaData[getCardIndex(id)].slug}`)
+                router.push(url)
             }, 1000);
 
             return;
