@@ -20,8 +20,6 @@ export function Carousel() {
         resetState();
     }, []);
 
-    console.log('activeCardId', activeCardId)
-
     const router = useRouter();
 
     const rotateAngleStep = 360 / mediaData.length;    

@@ -36,7 +36,10 @@ export function MediaDetails({ mediaItem }: IMediaPage) {
                     <div className="bg-secondary rounded font-semibold text-black text-sm py-0.5 px-2">
                         IMDb
                     </div>
-                    <div className="text-white">
+                    <div 
+                        className="text-white"
+                        style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}
+                    >
                         {mediaItem.rating.toFixed(1)}/10
                     </div>
                 </div>                    

@@ -28,15 +28,20 @@ export function Episodes({ mediaItem }: IEpisodes) {
             {currentSeason.episodes.map((episode) => (
                 <m.div key={episode.id}
                     variants={episodeAnimation}
-                >
-                    <Image
+                >   
+                    <div 
+                        className="relative aspect-video rounded-lg overflow-hidden max-w-[243px] max-h-[136px]"
+                    >
+                        <Image
                         src={episode.poster}
                         alt={episode.title}
-                        width={243}
-                        height={136}
-                        className="rounded-lg"
-                        draggable={false}
-                    />
+                        fill
+                        sizes="243px 136px"
+                        className="object-cover"                        
+                        draggable={false} 
+                        priority={true}                       
+                        />
+                    </div> 
                     <div  className="flex items-center gap-2 text-sm mt-2">
                         <div>{episode.title}</div>
                         <div className="opacity-50">• {episode.duration}m</div>

@@ -7,6 +7,7 @@ import { MediaDetails } from "./MediaDetails";
 import { Products } from "./Products";
 import { CSSProperties } from "react";
 import { Episodes } from "./Episodes";
+import * as m from "motion/react-m"
 
 export function MediaPage({mediaItem}: IMediaPage) {
     const {
@@ -23,18 +24,39 @@ export function MediaPage({mediaItem}: IMediaPage) {
   const style: CSSProperties = {
     height: 540,
     width: '100%',
-    backgroundImage
+    backgroundImage,
+    transformStyle: "preserve-3d"
   }    
 
-    return (
-    <div>
-        <div style={style} className="bg-center bg-cover bg-no-repeat relative -mt-25 left-0 z-0">            
-            <div className="absolute w-full bottom-0 left-0 p-8 flex items-end justify-between z-1">
-                <MediaDetails mediaItem={mediaItem}/>            
-                <Products /> 
-            </div>                                  
-        </div>
-        <Episodes mediaItem={mediaItem} />        
-    </div>
+    return (    
+      <div        
+        style={{
+          perspective: "1000px"
+        }}
+      >
+        <m.div
+          initial={{
+            clipPath: "inset(50% 50% 50% 50%)",
+            rotateX: -180  
+          }}
+          animate={{
+            clipPath: "inset(0% 0% 0% 0%)",
+            rotateX: 0
+          }}
+          transition={{            
+            type: "keyframes",
+            duration: 1,
+            ease: "easeInOut"
+          }}            
+          style={style}
+          className="bg-center bg-cover bg-no-repeat relative -mt-25 left-0 z-0"
+        >            
+          <div className="absolute w-full bottom-0 left-0 p-8 flex items-end justify-between z-1">
+            <MediaDetails mediaItem={mediaItem}/>            
+            <Products /> 
+          </div>                                  
+        </m.div>
+        <Episodes mediaItem={mediaItem} />
+      </div>                  
     )
 }
