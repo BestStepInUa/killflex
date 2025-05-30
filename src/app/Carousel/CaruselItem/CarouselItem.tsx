@@ -11,18 +11,26 @@ import { mediaData } from "@/media/media.data";
 import { useMainAnimationStore } from "@/store/main-animation.store";
 
 export function CarouselItem({ item, index, updateActiveCard }: ICarouselItem) {
-    const {activeCardId, setActiveCardId} = useCarouselStore()
-    const isActive = activeCardId === item.id
+    const {activeCardId, setActiveCardId} = useCarouselStore();
+    const isActive = activeCardId === item.id;
    
-    const angleStep = 360 / mediaData.length
-    const angle = -90 + angleStep * index
+    const angleStep = 360 / mediaData.length;
+    const angle = -90 + angleStep * index;
 
-    const radius = 430
+    const radius = 430;
 
-    const {isNewPageAnimation} = useMainAnimationStore()
+    const {isNewPageAnimation} = useMainAnimationStore();
 
     const isActiveNewPageAnimation = isNewPageAnimation && isActive;
-    const isNotActiveNewPageAnimation = isNewPageAnimation && !isActive
+    const isNotActiveNewPageAnimation = isNewPageAnimation && !isActive;
+    
+    const activeIndex = mediaData.findIndex(media => media.id === activeCardId);
+    const distanceFromActive = index - activeIndex;
+
+    const zIndex = isActive
+        ? 20
+        : 10 - Math.abs(distanceFromActive);
+
     
 	return (
         <div
@@ -31,7 +39,7 @@ export function CarouselItem({ item, index, updateActiveCard }: ICarouselItem) {
                 top: "50%",
                 left: "50%",
                 transform: `translate(-50%, -50%) rotate(${angle}deg) translate(0, -${radius}px)`,
-                zIndex: isActive ? 20 : 0,
+                zIndex,
                 perspective: "1000px"
             }}
         >
@@ -44,7 +52,10 @@ export function CarouselItem({ item, index, updateActiveCard }: ICarouselItem) {
                 transformStyle: "preserve-3d"
             }}            
             initial={{ 
-                filter: "grayscale(100%) contrast(75%)"                
+                filter: isActive 
+                    ? "grayscale(0%) contrast(100%)"
+                    : "grayscale(100%) contrast(75%)",
+                scale: isActive ? 1.2 : 1                
             }}
             animate={isActiveNewPageAnimation ? {
                     scale: 1.3,

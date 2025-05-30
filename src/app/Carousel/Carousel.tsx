@@ -28,8 +28,9 @@ export function Carousel() {
     }, []);
 
     const router = useRouter();
-
-    const rotateAngleStep = 360 / mediaData.length;    
+    
+    const totalCards = mediaData.length;
+    const rotateAngleStep = 360 / totalCards;    
         
     const updateActiveCard = (id: number) => {
         if (activeCardId === id) {
@@ -52,16 +53,22 @@ export function Carousel() {
         const oldIndex = getCardIndex(activeCardId);        
         const newIndex = getCardIndex(id);
         
-        const diff = newIndex - oldIndex;
+        let diff = newIndex - oldIndex;
+
+        if (diff > totalCards / 2) {
+            diff -= totalCards;
+        } else if (diff < -totalCards / 2) {
+            diff += totalCards;
+        }        
         
-        let newRotateAngle = -(diff * rotateAngleStep);
+        const newRotateAngle = -(diff * rotateAngleStep);        
         
-        newRotateAngle = newRotateAngle === 330 ? -30 : newRotateAngle;
-        newRotateAngle = newRotateAngle === -330 ? 30 : newRotateAngle;
-        newRotateAngle = newRotateAngle === 300 ? -60 : newRotateAngle;
-        newRotateAngle = newRotateAngle === -300 ? 60 : newRotateAngle;
-        newRotateAngle = newRotateAngle === 270 ? -90 : newRotateAngle;
-        newRotateAngle = newRotateAngle === -270 ? 90 : newRotateAngle;
+        // newRotateAngle = newRotateAngle === 330 ? -30 : newRotateAngle;
+        // newRotateAngle = newRotateAngle === -330 ? 30 : newRotateAngle;
+        // newRotateAngle = newRotateAngle === 300 ? -60 : newRotateAngle;
+        // newRotateAngle = newRotateAngle === -300 ? 60 : newRotateAngle;
+        // newRotateAngle = newRotateAngle === 270 ? -90 : newRotateAngle;
+        // newRotateAngle = newRotateAngle === -270 ? 90 : newRotateAngle;
                
         setRotateAngle(prev => prev + newRotateAngle);        
         setActiveCardId(id);
@@ -78,7 +85,7 @@ export function Carousel() {
             }}
             transition={{
                 type: "keyframes",
-                duration: isHideOtherCards ? 1 : 0.6
+                duration: isHideOtherCards ? 1 : 1.3
             }}
         >
         {mediaData.map((media, index) => (
