@@ -1,16 +1,15 @@
-'use client';
-
 import { Bell, Grip, Search } from "lucide-react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { Menu } from "./Menu";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
+import { headers } from "next/headers";
 
-export function Header() {
-
-  const pathname = usePathname();
-  const isMediaPage = pathname.includes("/media/");
+export async function Header() {
+  const headerList = await headers();
+  const pathname = headerList.get("x-current-path");
+  
+  const isMediaPage = pathname?.includes("/media/");
 
   return (
     <header className={twMerge(
