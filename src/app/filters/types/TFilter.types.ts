@@ -1,1 +1,1 @@
-export type TFilter = "Popular" | "Latest" | "Top Rated" | "Recommended"
+export type TFilter = 'Popular' | 'Latest' | 'Top Rated' | 'Recommended'

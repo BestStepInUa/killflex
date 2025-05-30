@@ -1,9 +1,9 @@
-import { IMediaItem } from "@/app/carousel/types/IMediaItem.types.";
+import { IMediaItem } from '@/app/carousel/types/IMediaItem.types.'
 
 export interface IMediaPage {
-    mediaItem: IMediaItem
+	mediaItem: IMediaItem
 }
 
 export interface IEpisodes {
-    mediaItem: IMediaItem
+	mediaItem: IMediaItem
 }

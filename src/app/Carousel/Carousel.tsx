@@ -1,101 +1,107 @@
-'use client';
+'use client'
 
-import { useEffect, useLayoutEffect, useState } from "react";
-import * as m from "motion/react-m"
-import { mediaData } from "@/media/media.data";
-import { useCarouselStore } from "@/store/carousel.store";
-import { CarouselItem } from "./CaruselItem/CarouselItem";
-import { useRouter } from "next/navigation";
-import { useMainAnimationStore } from "@/store/main-animation.store";
+import * as m from 'motion/react-m'
+import { useRouter } from 'next/navigation'
+import { useEffect, useLayoutEffect, useState } from 'react'
 
-const getCardIndex = (cardId: number) => mediaData.findIndex(item => item.id === cardId);
+import { mediaData } from '@/media/media.data'
+
+import { useCarouselStore } from '@/store/carousel.store'
+import { useMainAnimationStore } from '@/store/main-animation.store'
+
+import PageConfig from '@/config/page.config'
+
+import { CarouselItem } from './CaruselItem/CarouselItem'
+
+const getCardIndex = (cardId: number) =>
+	mediaData.findIndex(item => item.id === cardId)
 
 export function Carousel() {
-    const {activeCardId, setActiveCardId} = useCarouselStore();     
-    const [rotateAngle, setRotateAngle] = useState(0);
+	const { activeCardId, setActiveCardId } = useCarouselStore()
+	const [rotateAngle, setRotateAngle] = useState(0)
 
-    const {changeState, resetState, isHideOtherCards} = useMainAnimationStore();
+	const { changeState, resetState, isHideOtherCards } = useMainAnimationStore()
 
-    useLayoutEffect(() => {
-        resetState();
-        setActiveCardId(4)
-    }, []);
+	useLayoutEffect(() => {
+		resetState()
+		setActiveCardId(4)
+	}, [])
 
-    const router = useRouter();
+	const router = useRouter()
 
-    useEffect(() => {
-        mediaData.forEach(media => {            
-            router.prefetch(`/media/${media.slug}`);
-        })
-    }, []);
-    
-    const totalCards = mediaData.length;
-    const rotateAngleStep = 360 / totalCards;    
-        
-    const updateActiveCard = (id: number) => {
-        if (activeCardId === id) {
-            const url = `/media/${mediaData[getCardIndex(id)].slug}`;
-            // router.prefetch(url);
+	useEffect(() => {
+		mediaData.forEach(media => {
+			router.prefetch(PageConfig.MEDIA(media.slug))
+		})
+	}, [])
 
-            changeState("isNewPageAnimation", true);
-            changeState("isHideHeading", true),
-            changeState("isHideOtherCards", true);           
+	const totalCards = mediaData.length
+	const rotateAngleStep = 360 / totalCards
 
-            setTimeout(() => {
-                router.push(url)
-            }, 1300);
+	const updateActiveCard = (id: number) => {
+		if (activeCardId === id) {
+			const url = PageConfig.MEDIA(mediaData[getCardIndex(id)].slug)
+			// router.prefetch(url);
 
-            return;
-        }
+			changeState('isNewPageAnimation', true)
+			changeState('isHideHeading', true)
+			changeState('isHideOtherCards', true)
 
-        const oldIndex = getCardIndex(activeCardId);        
-        const newIndex = getCardIndex(id);
-        
-        let diff = newIndex - oldIndex;
+			setTimeout(() => {
+				router.push(url)
+			}, 1300)
 
-        if (diff > totalCards / 2) {
-            diff -= totalCards;
-        } else if (diff < -totalCards / 2) {
-            diff += totalCards;
-        }        
-        
-        const newRotateAngle = -(diff * rotateAngleStep);        
-        
-        // newRotateAngle = newRotateAngle === 330 ? -30 : newRotateAngle;
-        // newRotateAngle = newRotateAngle === -330 ? 30 : newRotateAngle;
-        // newRotateAngle = newRotateAngle === 300 ? -60 : newRotateAngle;
-        // newRotateAngle = newRotateAngle === -300 ? 60 : newRotateAngle;
-        // newRotateAngle = newRotateAngle === 270 ? -90 : newRotateAngle;
-        // newRotateAngle = newRotateAngle === -270 ? 90 : newRotateAngle;
-               
-        setRotateAngle(prev => prev + newRotateAngle);        
-        setActiveCardId(id);
-    }
+			return
+		}
 
-    return (
-        <m.div className="mx-auto mt-60 relative w-[952px] h-[952px] will-change-transform"
-            initial ={{ 
-                rotate: 0
-            }}
-            animate={{
-                rotate: rotateAngle ? `${rotateAngle}deg` : 0,
-                translateY: isHideOtherCards ? 200 : 0
-            }}
-            transition={{
-                type: "keyframes",
-                ease: "easeInOut",
-                duration: isHideOtherCards ? 1.8 : 1
-            }}
-        >
-        {mediaData.map((media, index) => (
-            <CarouselItem
-                key={media.id}
-                item={media}
-                index={index}
-                updateActiveCard={updateActiveCard.bind(null, media.id)}
-                
-            />
-        ))}
-        </m.div> 
-    )          
+		const oldIndex = getCardIndex(activeCardId)
+		const newIndex = getCardIndex(id)
+
+		let diff = newIndex - oldIndex
+
+		if (diff > totalCards / 2) {
+			diff -= totalCards
+		} else if (diff < -totalCards / 2) {
+			diff += totalCards
+		}
+
+		const newRotateAngle = -(diff * rotateAngleStep)
+
+		// newRotateAngle = newRotateAngle === 330 ? -30 : newRotateAngle;
+		// newRotateAngle = newRotateAngle === -330 ? 30 : newRotateAngle;
+		// newRotateAngle = newRotateAngle === 300 ? -60 : newRotateAngle;
+		// newRotateAngle = newRotateAngle === -300 ? 60 : newRotateAngle;
+		// newRotateAngle = newRotateAngle === 270 ? -90 : newRotateAngle;
+		// newRotateAngle = newRotateAngle === -270 ? 90 : newRotateAngle;
+
+		setRotateAngle(prev => prev + newRotateAngle)
+		setActiveCardId(id)
+	}
+
+	return (
+		<m.div
+			className="relative mx-auto mt-60 h-[952px] w-[952px] will-change-transform"
+			initial={{
+				rotate: 0
+			}}
+			animate={{
+				rotate: rotateAngle ? `${rotateAngle}deg` : 0,
+				translateY: isHideOtherCards ? 200 : 0
+			}}
+			transition={{
+				type: 'keyframes',
+				ease: 'easeInOut',
+				duration: isHideOtherCards ? 1.8 : 1
+			}}
+		>
+			{mediaData.map((media, index) => (
+				<CarouselItem
+					key={media.id}
+					item={media}
+					index={index}
+					updateActiveCard={updateActiveCard.bind(null, media.id)}
+				/>
+			))}
+		</m.div>
+	)
 }

@@ -1,20 +1,20 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --color-primary: #7a49fe;
-  --color-secondary: #ffd700;
-  --default-transition-duration: 0.3s;
-  --default-transition-timing-function: easy;
+	--color-primary: #7a49fe;
+	--color-secondary: #ffd700;
+	--default-transition-duration: 0.3s;
+	--default-transition-timing-function: easy;
 }
 
 :root {
-  --background: #fff;
-  --foreground: #171717;
+	--background: #fff;
+	--foreground: #171717;
 }
 
 body {
-  @apply relative;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-montserrat), sans-serif;
+	@apply relative;
+	color: var(--foreground);
+	background: var(--background);
+	font-family: var(--font-montserrat), sans-serif;
 }

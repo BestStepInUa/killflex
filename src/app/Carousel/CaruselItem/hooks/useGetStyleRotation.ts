@@ -1,20 +1,16 @@
-import { useWindowDimensions } from "./useWindowsDemensions";
+import { useWindowDimensions } from './useWindowsDemensions'
 
-export const useGetStyleRotation = (
-    index: number,
-    total: number,
-) => {
-    const middle = (total - 1) / 2
-    const rotate = (index - middle) * 10
+export const useGetStyleRotation = (index: number, total: number) => {
+	const middle = (total - 1) / 2
+	const rotate = (index - middle) * 10
 
-    const distanceFromMiddle = Math.abs(index - middle)
-    const translateY = 
-        Math.pow(distanceFromMiddle, 5)
+	const distanceFromMiddle = Math.abs(index - middle)
+	const translateY = Math.pow(distanceFromMiddle, 5)
 
-    return {
-        rotate: rotate,
-        translateY: translateY
-    }
+	return {
+		rotate: rotate,
+		translateY: translateY
+	}
 }
 
 // import { useWindowDimensions } from "./useWindowsDemensions";
@@ -30,7 +26,7 @@ export const useGetStyleRotation = (
 //     const rotate = (index - middle) * (isTablet ? 5 : 10)
 
 //     const distanceFromMiddle = Math.abs(index - middle)
-//     const translateY = 
+//     const translateY =
 //         Math.pow(distanceFromMiddle, isTablet ? 1.55 : isMobile ? 1.8 : 2) *
 //         (isTablet ? 5 : 7)
 

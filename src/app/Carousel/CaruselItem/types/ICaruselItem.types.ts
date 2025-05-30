@@ -1,6 +1,6 @@
-import { IMediaItem } from "../../types/IMediaItem.types.";
+import { IMediaItem } from '../../types/IMediaItem.types.'
 
-export interface ICarouselItem {    
+export interface ICarouselItem {
 	index: number
 	item: IMediaItem
 	updateActiveCard: () => void

@@ -1,38 +1,37 @@
-import { TFilter } from "@/app/filters/types/TFilter.types"
+import { TFilter } from '@/app/filters/types/TFilter.types'
 
-export interface IMediaItem {  
-    id: number
-    slug: string
+export interface IMediaItem {
+	id: number
+	slug: string
 
-    title: string
-    rating: number
-    
-    poster: string
-    backdrop: string
+	title: string
+	rating: number
 
-    year: number
+	poster: string
+	backdrop: string
 
-    seasons: ISeason[]
+	year: number
 
-    genres: string[]
+	seasons: ISeason[]
+
+	genres: string[]
 }
 
 export interface ISeason {
-    id: number
-    slug: string
+	id: number
+	slug: string
 
-    title: string
-    episodes: IVideo[]
-    
+	title: string
+	episodes: IVideo[]
 }
 
 export interface IVideo {
-    id: number
-    slug: string
+	id: number
+	slug: string
 
-    title: string
-    poster: string
+	title: string
+	poster: string
 
-    duration: number
-    videoUrl: string
+	duration: number
+	videoUrl: string
 }
