@@ -9,6 +9,7 @@ import { twMerge } from "tailwind-merge";
 import { CarouselItemDetails } from "../CarouselItemDetails/CarouselItemDetails";
 import { mediaData } from "@/media/media.data";
 import { useMainAnimationStore } from "@/store/main-animation.store";
+import { get } from "http";
 
 export function CarouselItem({ item, index, updateActiveCard }: ICarouselItem) {
     const {activeCardId, setActiveCardId} = useCarouselStore();
@@ -25,13 +26,20 @@ export function CarouselItem({ item, index, updateActiveCard }: ICarouselItem) {
     const isNotActiveNewPageAnimation = isNewPageAnimation && !isActive;
     
     const activeIndex = mediaData.findIndex(media => media.id === activeCardId);
-    const distanceFromActive = index - activeIndex;
-
-    const zIndex = isActive
-        ? 20
-        : 10 - Math.abs(distanceFromActive);
-
+    const totalItems = mediaData.length;
     
+    const getCircularIndex = (index: number, activeInden: number, total: number) => {
+        const directDistance = index - activeInden;
+        const wrappedDistance = directDistance > 0
+            ? directDistance - total
+            : directDistance + total;
+        return Math.abs(directDistance) < Math.abs(wrappedDistance) ?  directDistance : wrappedDistance;
+    }
+    
+    const distanceFromActive = getCircularIndex(index, activeIndex, totalItems);
+    
+    const zIndex = isActive ? 20 : 10 - Math.abs(distanceFromActive);
+
 	return (
         <div
             style={{

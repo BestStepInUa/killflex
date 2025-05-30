@@ -85,7 +85,7 @@ export function Carousel() {
             }}
             transition={{
                 type: "keyframes",
-                duration: isHideOtherCards ? 1 : 1.3
+                duration: 1
             }}
         >
         {mediaData.map((media, index) => (
