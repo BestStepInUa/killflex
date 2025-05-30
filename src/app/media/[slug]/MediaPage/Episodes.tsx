@@ -6,14 +6,14 @@ import { episodes } from "@/media/episodes.data";
 import { episodesAnimation, episodeAnimation } from "./animation";
 
 export function Episodes({ mediaItem }: IEpisodes) {
-    const [currentSeason, setCurrentSeason] = useState(mediaItem.seasons[0])
+    const [currentSeason] = useState(mediaItem.seasons[0])
 
     return (
     <div className="px-8 py-6">
         <m.div 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}            
+            transition={{ duration: 0.6, delay: 0.8 }}            
             className="flex items-center">
             <h2 className="pr-2 border-r border-r-slate-400/30 text-lg font-medium">Episodes</h2>
             <div className="opacity-50 text-sm ml-2">{currentSeason.title}</div>

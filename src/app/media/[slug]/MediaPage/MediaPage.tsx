@@ -36,16 +36,16 @@ export function MediaPage({mediaItem}: IMediaPage) {
       >
         <m.div
           initial={{
-            clipPath: "inset(6.5% 40.5%)",
-            rotateX: -86,
+            clipPath: "inset(6.5% 40.5% round 20px)",
+            rotateX: -85,
             opacity: 0.3,
-            translateY: 230
+            translateY: 230            
           }}
           animate={{
             clipPath: "inset(0% 0% 0% 0%)",
             rotateX: 0,
             opacity: 1,
-            translateY: 0
+            translateY: 0            
           }}
           transition={{            
             type: "keyframes",

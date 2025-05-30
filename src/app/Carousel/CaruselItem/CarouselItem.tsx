@@ -22,6 +22,7 @@ export function CarouselItem({ item, index, updateActiveCard }: ICarouselItem) {
     const {isNewPageAnimation} = useMainAnimationStore()
 
     const isActiveNewPageAnimation = isNewPageAnimation && isActive;
+    const isNotActiveNewPageAnimation = isNewPageAnimation && !isActive
     
 	return (
         <div
@@ -47,19 +48,22 @@ export function CarouselItem({ item, index, updateActiveCard }: ICarouselItem) {
             }}
             animate={isActiveNewPageAnimation ? {
                     scale: 1.3,
-                    translateY: -45,
-                    rotateX: -92,
+                    translateY: -245,
+                    rotateX: -100,
                     filter: "grayscale(0%) contrast(100%)",              
                 } 
-                : {
+                : isNotActiveNewPageAnimation ? {
+                    scale: 0,
+                    opacity: 0
+                } : {
                     scale: isActive ? 1.2 : 1,
                     filter: isActive ? "grayscale(0%) contrast(100%)" : "grayscale(100%) contrast(75%)"
                 } 
             }
             transition={{
                 type: "keyframes",
-                duration: isActiveNewPageAnimation ? 1 : 0.4,
-                ease: isActiveNewPageAnimation ? "easeInOut" : "easeIn"
+                duration: isActiveNewPageAnimation || isNotActiveNewPageAnimation ? 1 : 0.4,
+                ease: isActiveNewPageAnimation || isNotActiveNewPageAnimation ? "easeInOut" : "easeIn"
             }}
             onClick={updateActiveCard}        
         >   

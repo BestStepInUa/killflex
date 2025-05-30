@@ -7,7 +7,8 @@ export const episodesAnimation: Variants = {
         transition: {
             staggerChildren: 0.25,
             duration: 1,
-            ease: "linear"
+            ease: "linear",
+            delayChildren: 0.8
         }
     }
 }
