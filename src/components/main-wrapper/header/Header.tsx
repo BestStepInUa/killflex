@@ -1,27 +1,38 @@
+'use client';
+
 import { Bell, Grip, Search } from "lucide-react";
 import Image from "next/image";
 import { Menu } from "./Menu";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
-import { headers } from "next/headers";
+import { use, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useMainAnimationStore } from "@/store/main-animation.store";
 
-export async function Header() {
-  const headerList = await headers();
-  const pathname = headerList.get("x-current-path");
+const checkMediaPath = (pathname: string | null ) => {  
+  return !pathname?.includes("/media/");
+};
+
+export function Header({ pathname }: { pathname: string | null }) {
+  const [isShowMenu, setIsShowMenu] = useState(checkMediaPath(pathname));
+    
+  const clientPathName = usePathname();  
   
-  const isMediaPage = pathname?.includes("/media/");
-
+  useEffect(() => {
+    setIsShowMenu(checkMediaPath(clientPathName));
+  }, [clientPathName]);  
+ 
   return (
     <header className={twMerge(
       "p-7 flex items-center justify-between relative z-1",
-      isMediaPage && "text-white"
+      !isShowMenu && "text-white"
     )}
     >
       <div className="flex items-center gap-6">
         <Link className="transition-colors hover:text-primary" href="/">
             <Grip />
         </Link>             
-        {!isMediaPage && <Menu />}
+        {isShowMenu && <Menu />}
       </div>
 
       <div className="flex items-center gap-6">
