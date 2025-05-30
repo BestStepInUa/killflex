@@ -21,7 +21,7 @@ export function Home() {
                 transition={
                     isHideHeading 
                         ? { 
-                            duration: 0.6,
+                            duration: 1.8,
                             type: "keyframes",
                             ease: "easeInOut"
                         } : {}

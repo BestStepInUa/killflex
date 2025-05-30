@@ -21,13 +21,13 @@ export function Carousel() {
         setActiveCardId(4)
     }, []);
 
+    const router = useRouter();
+
     useEffect(() => {
         mediaData.forEach(media => {            
             router.prefetch(`/media/${media.slug}`);
         })
     }, []);
-
-    const router = useRouter();
     
     const totalCards = mediaData.length;
     const rotateAngleStep = 360 / totalCards;    
@@ -38,14 +38,12 @@ export function Carousel() {
             // router.prefetch(url);
 
             changeState("isNewPageAnimation", true);
-            setTimeout(() => {
-                changeState("isHideHeading", true),
-                changeState("isHideOtherCards", true);
-            }, 600);
+            changeState("isHideHeading", true),
+            changeState("isHideOtherCards", true);           
 
             setTimeout(() => {
                 router.push(url)
-            }, 650);
+            }, 1300);
 
             return;
         }
@@ -75,7 +73,7 @@ export function Carousel() {
     }
 
     return (
-        <m.div className="mx-auto mt-60 relative w-[952px] h-[952px]"
+        <m.div className="mx-auto mt-60 relative w-[952px] h-[952px] will-change-transform"
             initial ={{ 
                 rotate: 0
             }}
@@ -85,7 +83,8 @@ export function Carousel() {
             }}
             transition={{
                 type: "keyframes",
-                duration: 1
+                ease: "easeInOut",
+                duration: isHideOtherCards ? 1.8 : 1
             }}
         >
         {mediaData.map((media, index) => (

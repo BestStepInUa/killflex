@@ -37,9 +37,9 @@ export function MediaPage({mediaItem}: IMediaPage) {
         <m.div
           initial={{
             clipPath: "inset(6.5% 40.5% round 20px)",
-            rotateX: -85,
+            rotateX: 89,
             opacity: 0.3,
-            translateY: 230            
+            translateY: 92            
           }}
           animate={{
             clipPath: "inset(0% 0% 0% 0%)",
@@ -49,7 +49,7 @@ export function MediaPage({mediaItem}: IMediaPage) {
           }}
           transition={{            
             type: "keyframes",
-            duration: 1,
+            duration: 1.5,
             ease: "easeInOut"
           }}            
           style={style}
