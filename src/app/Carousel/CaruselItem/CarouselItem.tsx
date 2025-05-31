@@ -1,106 +1,47 @@
 'use client'
 
+import { motion as m } from 'framer-motion'
 import { AnimatePresence } from 'motion/react'
-import * as m from 'motion/react-m'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
-
-import { mediaData } from '@/media/media.data'
 
 import { useCarouselStore } from '@/store/carousel.store'
 import { useMainAnimationStore } from '@/store/main-animation.store'
 
 import { CarouselItemDetails } from '../CarouselItemDetails/CarouselItemDetails'
+import { carouselItemAnimation } from '../animation/carousel-item.animation'
+import { useCarouselItemAngle } from '../hooks/useCarouselItemAngle'
+import { useCarouselItemZIndex } from '../hooks/useCarouselItemZIndex'
 
 import { ICarouselItem } from './types/ICaruselItem.types'
 
 export function CarouselItem({ item, index, updateActiveCard }: ICarouselItem) {
-	const { activeCardId, setActiveCardId } = useCarouselStore()
-	const isActive = activeCardId === item.id
-
-	const angleStep = 360 / mediaData.length
-	const angle = -90 + angleStep * index
-
-	const radius = 430
+	const { angle, radius } = useCarouselItemAngle({ index })
 
 	const { isNewPageAnimation } = useMainAnimationStore()
+	const { activeCardId } = useCarouselStore()
 
-	const isActiveNewPageAnimation = isNewPageAnimation && isActive
-	const isNotActiveNewPageAnimation = isNewPageAnimation && !isActive
+	const isActive = activeCardId === item.id
 
-	const activeIndex = mediaData.findIndex(media => media.id === activeCardId)
-	const totalItems = mediaData.length
-
-	const getCircularIndex = (
-		index: number,
-		activeInden: number,
-		total: number
-	) => {
-		const directDistance = index - activeInden
-		const wrappedDistance =
-			directDistance > 0 ? directDistance - total : directDistance + total
-		return Math.abs(directDistance) < Math.abs(wrappedDistance)
-			? directDistance
-			: wrappedDistance
-	}
-
-	const distanceFromActive = getCircularIndex(index, activeIndex, totalItems)
-
-	const zIndex = isActive ? 20 : 10 - Math.abs(distanceFromActive)
+	const { zIndex } = useCarouselItemZIndex({ index, isActive })
 
 	return (
 		<div
+			className="absolute top-1/2 left-1/2"
 			style={{
-				position: 'absolute',
-				top: '50%',
-				left: '50%',
 				transform: `translate(-50%, -50%) rotate(${angle}deg) translate(0, -${radius}px)`,
 				zIndex,
 				perspective: '1000px'
 			}}
 		>
 			<m.button
+				{...carouselItemAnimation(isActive, isNewPageAnimation)}
 				className={twMerge(
 					'relative overflow-hidden rounded-xl transition will-change-transform',
 					isActive && 'shadow-lg'
 				)}
 				style={{
 					transformStyle: 'preserve-3d'
-				}}
-				initial={{
-					filter: isActive
-						? 'grayscale(0%) contrast(100%)'
-						: 'grayscale(100%) contrast(75%)',
-					scale: isActive ? 1.2 : 1
-				}}
-				animate={
-					isActiveNewPageAnimation
-						? {
-								scale: 1.3,
-								translateY: -180,
-								rotateX: -98,
-								filter: 'grayscale(0%) contrast(100%)'
-							}
-						: isNotActiveNewPageAnimation
-							? {
-									scale: 0,
-									opacity: 0
-								}
-							: {
-									scale: isActive ? 1.2 : 1,
-									filter: isActive
-										? 'grayscale(0%) contrast(100%)'
-										: 'grayscale(100%) contrast(75%)'
-								}
-				}
-				transition={{
-					type: 'keyframes',
-					duration:
-						isActiveNewPageAnimation || isNotActiveNewPageAnimation ? 1.3 : 0.4,
-					ease:
-						isActiveNewPageAnimation || isNotActiveNewPageAnimation
-							? 'easeOut'
-							: 'easeIn'
 				}}
 				onClick={updateActiveCard}
 			>

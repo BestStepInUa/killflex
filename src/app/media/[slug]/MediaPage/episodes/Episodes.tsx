@@ -2,10 +2,8 @@ import * as m from 'motion/react-m'
 import Image from 'next/image'
 import { useState } from 'react'
 
-import { episodes } from '@/media/episodes.data'
-
-import { episodeAnimation, episodesAnimation } from './animation'
-import { IEpisodes } from './types/IMediaPage.types'
+import { episodeAnimation, episodesAnimation } from '../animation'
+import { IEpisodes } from '../types/IMediaPage.types'
 
 export function Episodes({ mediaItem }: IEpisodes) {
 	const [currentSeason] = useState(mediaItem.seasons[0])

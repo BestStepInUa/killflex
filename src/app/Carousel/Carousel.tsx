@@ -1,82 +1,16 @@
 'use client'
 
 import * as m from 'motion/react-m'
-import { useRouter } from 'next/navigation'
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { mediaData } from '@/media/media.data'
 
-import { useCarouselStore } from '@/store/carousel.store'
-import { useMainAnimationStore } from '@/store/main-animation.store'
-
-import PageConfig from '@/config/page.config'
-
 import { CarouselItem } from './CaruselItem/CarouselItem'
-
-const getCardIndex = (cardId: number) =>
-	mediaData.findIndex(item => item.id === cardId)
+import { useCarousel } from './hooks/useCarousel'
 
 export function Carousel() {
-	const { activeCardId, setActiveCardId } = useCarouselStore()
 	const [rotateAngle, setRotateAngle] = useState(0)
-
-	const { changeState, resetState, isHideOtherCards } = useMainAnimationStore()
-
-	useLayoutEffect(() => {
-		resetState()
-		setActiveCardId(4)
-	}, [])
-
-	const router = useRouter()
-
-	useEffect(() => {
-		mediaData.forEach(media => {
-			router.prefetch(PageConfig.MEDIA(media.slug))
-		})
-	}, [])
-
-	const totalCards = mediaData.length
-	const rotateAngleStep = 360 / totalCards
-
-	const updateActiveCard = (id: number) => {
-		if (activeCardId === id) {
-			const url = PageConfig.MEDIA(mediaData[getCardIndex(id)].slug)
-			// router.prefetch(url);
-
-			changeState('isNewPageAnimation', true)
-			changeState('isHideHeading', true)
-			changeState('isHideOtherCards', true)
-
-			setTimeout(() => {
-				router.push(url)
-			}, 1300)
-
-			return
-		}
-
-		const oldIndex = getCardIndex(activeCardId)
-		const newIndex = getCardIndex(id)
-
-		let diff = newIndex - oldIndex
-
-		if (diff > totalCards / 2) {
-			diff -= totalCards
-		} else if (diff < -totalCards / 2) {
-			diff += totalCards
-		}
-
-		const newRotateAngle = -(diff * rotateAngleStep)
-
-		// newRotateAngle = newRotateAngle === 330 ? -30 : newRotateAngle;
-		// newRotateAngle = newRotateAngle === -330 ? 30 : newRotateAngle;
-		// newRotateAngle = newRotateAngle === 300 ? -60 : newRotateAngle;
-		// newRotateAngle = newRotateAngle === -300 ? 60 : newRotateAngle;
-		// newRotateAngle = newRotateAngle === 270 ? -90 : newRotateAngle;
-		// newRotateAngle = newRotateAngle === -270 ? 90 : newRotateAngle;
-
-		setRotateAngle(prev => prev + newRotateAngle)
-		setActiveCardId(id)
-	}
+	const { isHideOtherCards, updateActiveCard } = useCarousel({ setRotateAngle })
 
 	return (
 		<m.div

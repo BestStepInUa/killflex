@@ -5,3 +5,9 @@ export interface ICarouselItem {
 	item: IMediaItem
 	updateActiveCard: () => void
 }
+
+export interface IUseCircularIndex {
+	index: number
+	activeIndex: number
+	totalItems: number
+}

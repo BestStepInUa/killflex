@@ -1,6 +1,6 @@
 import * as m from 'motion/react-m'
 
-import { IMediaPage } from './types/IMediaPage.types'
+import { IMediaPage } from '../types/IMediaPage.types'
 
 export function MediaDetails({ mediaItem }: IMediaPage) {
 	return (

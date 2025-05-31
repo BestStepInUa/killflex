@@ -1,4 +1,4 @@
-import { Variants } from 'motion/react'
+import { HTMLMotionProps, Variants } from 'motion/react'
 
 export const episodesAnimation: Variants = {
 	hidden: { opacity: 0.5 },
@@ -23,5 +23,25 @@ export const episodeAnimation: Variants = {
 			type: 'spring',
 			bounce: 0.27
 		}
+	}
+}
+
+export const backdropAnimation: HTMLMotionProps<'div'> = {
+	initial: {
+		clipPath: 'inset(6.5% 40.5% round 20px)',
+		rotateX: 89,
+		opacity: 0.3,
+		translateY: 92
+	},
+	animate: {
+		clipPath: 'inset(0% 0% 0% 0%)',
+		rotateX: 0,
+		opacity: 1,
+		translateY: 0
+	},
+	transition: {
+		type: 'keyframes',
+		duration: 1.5,
+		ease: 'easeInOut'
 	}
 }
