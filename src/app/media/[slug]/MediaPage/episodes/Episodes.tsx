@@ -1,9 +1,10 @@
 import * as m from 'motion/react-m'
-import Image from 'next/image'
 import { useState } from 'react'
 
-import { episodeAnimation, episodesAnimation } from '../animation'
+import { episodesAnimation } from '../animation'
 import { IEpisodes } from '../types/IMediaPage.types'
+
+import { EpisodeItem } from './EpisodeItem'
 
 export function Episodes({ mediaItem }: IEpisodes) {
 	const [currentSeason] = useState(mediaItem.seasons[0])
@@ -29,26 +30,10 @@ export function Episodes({ mediaItem }: IEpisodes) {
 				className="mt-3.5 grid grid-cols-6 gap-6"
 			>
 				{currentSeason.episodes.map(episode => (
-					<m.div
+					<EpisodeItem
 						key={episode.id}
-						variants={episodeAnimation}
-					>
-						<div className="relative aspect-video max-h-[136px] max-w-[243px] overflow-hidden rounded-lg">
-							<Image
-								src={episode.poster}
-								alt={episode.title}
-								fill
-								sizes="243px 136px"
-								className="object-cover"
-								draggable={false}
-								priority={true}
-							/>
-						</div>
-						<div className="mt-2 flex items-center gap-2 text-sm">
-							<div>{episode.title}</div>
-							<div className="opacity-50">• {episode.duration}m</div>
-						</div>
-					</m.div>
+						episode={episode}
+					/>
 				))}
 			</m.div>
 		</div>

@@ -1,6 +1,8 @@
 'use client'
 
-import { motion as m } from 'framer-motion'
+import { AnimatePresence, motion as m } from 'framer-motion'
+
+import { useVideoPlayerStore } from '@/store/video-player.store'
 
 import { backdropAnimation } from './animation'
 import { Episodes } from './episodes/Episodes'
@@ -8,9 +10,12 @@ import { MediaDetails } from './media-details/MediaDetails'
 import { Products } from './products/Products'
 import { IMediaPage } from './types/IMediaPage.types'
 import { useMediaBackdrop } from './useMediaBackdrop'
+import { VideoPlayer } from './video-player/VideoPlayer'
 
 export function MediaPage({ mediaItem }: IMediaPage) {
 	const { style } = useMediaBackdrop(mediaItem.backdrop)
+
+	const { videoUrl } = useVideoPlayerStore()
 
 	return (
 		<div
@@ -18,6 +23,7 @@ export function MediaPage({ mediaItem }: IMediaPage) {
 				perspective: '1500px'
 			}}
 		>
+			<AnimatePresence>{videoUrl && <VideoPlayer />}</AnimatePresence>
 			<m.div
 				{...backdropAnimation}
 				style={style}

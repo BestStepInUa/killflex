@@ -45,3 +45,20 @@ export const backdropAnimation: HTMLMotionProps<'div'> = {
 		ease: 'easeInOut'
 	}
 }
+
+export const episodeItemWhiteOverlayAnimation: Variants = {
+	hidden: { opacity: 1 },
+	visible: {
+		opacity: 0,
+		transition: { duration: 0.4 }
+	}
+}
+
+// -- episodeItemWhiteOverlayAnimation for another white overlay realization --
+
+// export const episodeItemWhiteOverlayAnimation: HTMLMotionProps<'div'> = {
+// 	initial: { opacity: 0 },
+// 	animate: { opacity: 1 },
+// 	exit: { opacity: 0 },
+// 	transition: { duration: 0.4 }
+// }

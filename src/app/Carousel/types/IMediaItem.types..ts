@@ -1,5 +1,3 @@
-import { TFilter } from '@/app/filters/types/TFilter.types'
-
 export interface IMediaItem {
 	id: number
 	slug: string
