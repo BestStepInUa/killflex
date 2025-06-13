@@ -8,7 +8,7 @@ import { mediaData } from '@/media/media.data'
 import { CarouselItem } from './CaruselItem/CarouselItem'
 import { useCarousel } from './hooks/useCarousel'
 
-export function Carousel() {
+function Carousel() {
 	const [rotateAngle, setRotateAngle] = useState(0)
 	const { isHideOtherCards, updateActiveCard } = useCarousel({ setRotateAngle })
 
@@ -39,3 +39,5 @@ export function Carousel() {
 		</m.div>
 	)
 }
+
+export default Carousel
