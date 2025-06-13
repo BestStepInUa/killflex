@@ -20,7 +20,7 @@ export function Carousel() {
 			}}
 			animate={{
 				rotate: rotateAngle ? `${rotateAngle}deg` : 0,
-				translateY: isHideOtherCards ? 200 : 0
+				y: isHideOtherCards ? 200 : 0
 			}}
 			transition={{
 				type: 'keyframes',

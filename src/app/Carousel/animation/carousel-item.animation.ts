@@ -18,7 +18,7 @@ export const carouselItemAnimation = (
 		animate: isActiveNewPageAnimation
 			? {
 					scale: 1.3,
-					translateY: -180,
+					y: -180,
 					rotateX: -98,
 					filter: FILTER_OFF
 				}

@@ -18,7 +18,7 @@ export function Home() {
 				}}
 				animate={{
 					opacity: isHideHeading ? 0 : 1,
-					translateY: isHideHeading ? -100 : 0
+					y: isHideHeading ? -100 : 0
 				}}
 				transition={
 					isHideHeading
