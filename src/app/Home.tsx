@@ -2,10 +2,10 @@
 
 import * as m from 'motion/react-m'
 
-import { useMainAnimationStore } from '@/store/main-animation.store'
+import { Carousel } from '@/app/carousel/Carousel'
+import { Filters } from '@/app/filters/Filters'
 
-import { Carousel } from './carousel/Carousel'
-import { Filters } from './filters/Filters'
+import { useMainAnimationStore } from '@/store/main-animation.store'
 
 export function Home() {
 	const { isHideHeading } = useMainAnimationStore()
