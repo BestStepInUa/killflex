@@ -4,7 +4,7 @@ import * as m from 'motion/react-m'
 
 import { useMainAnimationStore } from '@/store/main-animation.store'
 
-import Carousel from './carousel/Carousel'
+import { Carousel } from './carousel/Carousel'
 import { Filters } from './filters/Filters'
 
 export function Home() {
