@@ -12,10 +12,11 @@ export function useMediaBackdrop(backdrop: string) {
 		height: 540,
 		src: backdrop,
 		priority: true,
-
 		quality: 100
 	})
+
 	const backgroundImage = getBackgroundImage(srcSet)
+
 	const style: CSSProperties = {
 		height: 540,
 		width: '100%',

@@ -1,6 +1,7 @@
 'use client'
 
 import { AnimatePresence, motion as m } from 'framer-motion'
+import { CSSProperties, useLayoutEffect } from 'react'
 
 import { useVideoPlayerStore } from '@/store/video-player.store'
 
@@ -15,12 +16,24 @@ import { VideoPlayer } from './video-player/VideoPlayer'
 export function MediaPage({ mediaItem }: IMediaPage) {
 	const { style } = useMediaBackdrop(mediaItem.backdrop)
 
-	const { videoUrl } = useVideoPlayerStore()
+	const { videoUrl, setVideoUrl } = useVideoPlayerStore()
+
+	useLayoutEffect(() => {
+		setVideoUrl('')
+	}, [])
+
+	const styleWhenOverlayOpened: CSSProperties = videoUrl
+		? {
+				position: 'relative',
+				zIndex: 2
+			}
+		: ({} as CSSProperties)
 
 	return (
 		<div
 			style={{
-				perspective: '1500px'
+				perspective: '1500px',
+				...styleWhenOverlayOpened
 			}}
 		>
 			<AnimatePresence>{videoUrl && <VideoPlayer />}</AnimatePresence>
